@@ -15,7 +15,7 @@ const mongoUrl = process.env.MONGODB_URL || '';
 async function main() {
 	try {
 		await mongoose.connect(mongoUrl);
-		console.log('Connected to MongoDB		');
+		console.log('Connected to MongoDB');
 	} catch (error) {
 		console.error(error);
 	}
