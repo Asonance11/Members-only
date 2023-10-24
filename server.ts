@@ -5,6 +5,7 @@ import createError from 'http-errors';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import path from 'path';
+import indexRouter from './routes/index';
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
 	next(createError(404));
@@ -48,10 +51,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 const port = process.env.PORT || 3000;
-
-app.get('/', (req: Request, res: Response) => {
-	res.send('Hello World!');
-});
 
 app.listen(port, () => {
 	console.log(`Server running on port http://localhost:${port}`);
