@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import logger from 'morgan';
 import path from 'path';
 import indexRouter from './routes/index';
+import signupRouter from './routes/signup';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', signupRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
