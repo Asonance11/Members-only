@@ -12,14 +12,16 @@ dotenv.config();
 
 const app: Application = express();
 
-const mongoUrl = process.env.MONGODB_URL || '';
+const mongoUrl =
+	process.env.MONGODB_URL || 'mongodb://localhost:27017/members_only';
 
-async function main() {
+async function connectToMongoDB() {
 	try {
 		await mongoose.connect(mongoUrl);
 		console.log('Connected to MongoDB');
 	} catch (error) {
-		console.error(error);
+		console.error('Failed to connect to MongoDB:', error);
+		process.exit(1); // Exit the application on MongoDB connection failure
 	}
 }
 
@@ -54,6 +56,15 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-	console.log(`Server running on port http://localhost:${port}`);
-});
+async function startServer() {
+	try {
+		await connectToMongoDB();
+		app.listen(port, () => {
+			console.log(`Server is running on http://localhost:${port}`);
+		});
+	} catch (error) {
+		console.error('Failed to start the server:', error);
+	}
+}
+
+startServer();
