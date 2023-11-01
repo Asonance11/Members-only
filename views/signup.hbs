@@ -12,3 +12,14 @@
 		<button type='submit'>Sign in</button>
 	</div>
 </form>
+
+{{#if errors.length}}
+	<div class='errors'>
+		<p>Error(s) occurred:</p>
+		<ul>
+			{{#each errors}}
+				<li>{{this.msg}}</li>
+			{{/each}}
+		</ul>
+	</div>
+{{/if}}
