@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
+import passport from 'passport';
 import User from '../models/user';
 export const signup_get = async (
 	req: Request,
@@ -68,3 +69,25 @@ export const signup_post = [
 		}
 	},
 ];
+
+// Login
+export const login_get = (req: Request, res: Response) => {
+	if (res.locals.currentUser) {
+		res.redirect('/');
+	}
+	res.render('login', {
+		title: 'Login - Members Only',
+	});
+};
+
+export const login_post = passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login',
+});
+
+export const logout_get = (req: Request, res: Response, next: NextFunction) => {
+	req.logout((err) => {
+		if (err) return next(err);
+	});
+	res.redirect('/');
+};
