@@ -1,14 +1,34 @@
-import mongoose, { InferSchemaType, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
-const UserSchema = new Schema({
-	username: { type: String, required: true, unique: true, length: { min: 3 } },
-	password: { type: String, required: true, length: { min: 6 } },
-	member: { type: Boolean, required: true },
-	admin: { type: Boolean, required: true },
+export interface IUser extends Document {
+	username: string;
+	password: string;
+	member: boolean;
+	admin: boolean;
+}
+
+const userSchema = new Schema<IUser>({
+	username: {
+		type: String,
+		required: true,
+		unique: true,
+		minlength: 3,
+	},
+	password: {
+		type: String,
+		required: true,
+		minlength: 6,
+	},
+	member: {
+		type: Boolean,
+		required: true,
+	},
+	admin: {
+		type: Boolean,
+		required: true,
+	},
 });
 
-type IUser = InferSchemaType<typeof UserSchema>;
-
-const User = mongoose.model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
 export default User;
