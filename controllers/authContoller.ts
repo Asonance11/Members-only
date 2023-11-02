@@ -15,13 +15,21 @@ export const signup_get = async (
 export const signup_post = [
 	body('username')
 		.trim()
-		.isLength({ min: 1 })
-		.withMessage('Username must consist of at least on character'),
+		.isLength({ min: 3 })
+		.withMessage('Username must consist of at least 3 characters'),
 	body('password')
 		.trim()
-		.isLength({ min: 1 })
+		.isLength({ min: 6 })
 		.escape()
-		.withMessage('Password must be more than one character'),
+		.withMessage('Password must consist of at least 6 characters'),
+	body('confirm_password')
+		.trim()
+		.escape()
+		.custom(async (value, { req }) => {
+			if (value !== req.body.password) {
+				throw new Error('Passwords must be the same');
+			}
+		}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		const errors = validationResult(req);
 
