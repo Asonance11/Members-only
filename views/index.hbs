@@ -1,2 +1,7 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{#if user}}
+	<p>Hi {{user.username}}</p>
+
+{{else}}
+	<h1>{{title}}</h1>
+	<p>Welcome to {{title}}</p>
+{{/if}}
