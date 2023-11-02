@@ -11,7 +11,6 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import path from 'path';
 import User from './models/user';
 import indexRouter from './routes/index';
-import signupRouter from './routes/signup';
 
 dotenv.config();
 
@@ -28,6 +27,8 @@ app.use(
 		saveUninitialized: true,
 	})
 );
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -89,7 +90,6 @@ app.set('view engine', 'hbs');
 
 // Routes
 app.use('/', indexRouter);
-app.use('/', signupRouter);
 
 // Error Handling
 app.use((req: Request, res: Response, next: NextFunction) => {
