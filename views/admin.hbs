@@ -1,0 +1,32 @@
+{{#if user.admin}}
+
+	<div>
+		<h2>Congrats you are an admin</h2>
+	</div>
+
+{{else}}
+	<h1>Become an Admin</h1>
+	<form action='/admin' method='post'>
+		<div>
+			<input
+				type='password'
+				id='password'
+				name='password'
+				placeholder='Enter the admin password'
+				required
+			/>
+		</div>
+		<button type='submit'>Submit password</button>
+	</form>
+{{/if}}
+
+{{#if errors.length}}
+	<div class='errors'>
+		<p>Error(s) occurred:</p>
+		<ul>
+			{{#each errors}}
+				<li>{{this.msg}}</li>
+			{{/each}}
+		</ul>
+	</div>
+{{/if}}
