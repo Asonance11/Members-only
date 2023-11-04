@@ -6,7 +6,12 @@ import {
 	signup_get,
 	signup_post,
 } from '../controllers/authContoller';
-import { member_get, member_post } from '../controllers/userController';
+import {
+	admin_get,
+	admin_post,
+	member_get,
+	member_post,
+} from '../controllers/userController';
 
 const router = express.Router();
 
@@ -27,5 +32,10 @@ router.get('/logout', logout_get);
 // become a member
 router.get('/member', member_get);
 router.post('/member', member_post);
+
+// become an admin
+
+router.get('/admin', admin_get);
+router.post('/admin', admin_post);
 
 export default router;
