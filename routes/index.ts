@@ -6,6 +6,7 @@ import {
 	signup_get,
 	signup_post,
 } from '../controllers/authContoller';
+import { member_get, member_post } from '../controllers/userController';
 
 const router = express.Router();
 
@@ -22,5 +23,9 @@ router.post('/signup', signup_post);
 router.get('/login', login_get);
 router.post('/login', login_post);
 router.get('/logout', logout_get);
+
+// become a member
+router.get('/member', member_get);
+router.post('/member', member_post);
 
 export default router;
