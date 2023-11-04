@@ -41,3 +41,43 @@ export const member_post = [
 		}
 	},
 ];
+
+export const admin_get = (req: Request, res: Response, next: NextFunction) => {
+	if (!res.locals.currentUser) {
+		res.redirect('/login');
+	}
+	res.render('admin', {
+		title: 'Become an Admin - Members Only',
+		user: res.locals.currentUser,
+	});
+};
+
+export const admin_post = [
+	body('password').trim().isLength({ min: 1 }).withMessage('Type a password'),
+	async (req: Request, res: Response, next: NextFunction) => {
+		const errors = validationResult(req);
+		const currentUser = res.locals.currentUser;
+		const title = 'Become an Admin - Members Only';
+
+		try {
+			if (!errors.isEmpty()) {
+				throw errors.array();
+			}
+
+			const { password } = req.body;
+
+			if (password !== process.env.ADMIN_PASSWORD) {
+				throw [{ msg: 'Wrong Passcode' }];
+			}
+
+			await User.findByIdAndUpdate(currentUser._id, { admin: true }, {});
+			res.redirect('/admin');
+		} catch (error) {
+			res.render('admin', {
+				title,
+				user: currentUser,
+				errors: error,
+			});
+		}
+	},
+];
