@@ -1,0 +1,31 @@
+{{#if user.member}}
+
+	<div>
+		<h2>Congrats you are a member</h2>
+	</div>
+
+{{else}}
+	<form action='/member' method='post'>
+		<div>
+			<input
+				type='password'
+				id='password'
+				name='password'
+				placeholder='Enter the member password'
+				required
+			/>
+		</div>
+		<button type='submit'>Submit password</button>
+	</form>
+{{/if}}
+
+{{#if errors.length}}
+	<div class='errors'>
+		<p>Error(s) occurred:</p>
+		<ul>
+			{{#each errors}}
+				<li>{{this.msg}}</li>
+			{{/each}}
+		</ul>
+	</div>
+{{/if}}
