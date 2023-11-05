@@ -9,7 +9,7 @@ export const signup_get = async (
 	next: NextFunction
 ) => {
 	res.render('signup', {
-		title: 'Sign up',
+		title: 'Sign up - Members Only',
 	});
 };
 
@@ -36,7 +36,7 @@ export const signup_post = [
 
 		if (!errors.isEmpty()) {
 			res.render('signup', {
-				title: 'Sign up',
+				title: 'Sign up - Members Only',
 				errors: errors.array(),
 			});
 			return;
@@ -76,14 +76,38 @@ export const login_get = (req: Request, res: Response) => {
 		res.redirect('/');
 	}
 	res.render('login', {
-		title: 'Login - Members Only',
+		title: 'Log in - Members Only',
+		error: req.flash('Error Logging in'),
 	});
 };
 
-export const login_post = passport.authenticate('local', {
-	successRedirect: '/',
-	failureRedirect: '/login',
-});
+export const login_post = [
+	body('username')
+		.trim()
+		.isLength({ min: 3 })
+		.withMessage('Username must consist of at least 3 characters'),
+	body('password')
+		.trim()
+		.isLength({ min: 6 })
+		.escape()
+		.withMessage('Password must consist of at least 6 characters'),
+	(req: Request, res: Response, next: NextFunction) => {
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			res.render('login', {
+				title: 'Log in - Members Only',
+				errors: errors.array(),
+			});
+		}
+		next();
+	},
+	passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true,
+	}),
+];
 
 export const logout_get = (req: Request, res: Response, next: NextFunction) => {
 	req.logout((err) => {
