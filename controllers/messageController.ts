@@ -38,6 +38,7 @@ export const create_message_post = [
 			});
 
 			await message.save();
+			res.redirect('/');
 		} catch (error) {
 			res.render('message', {
 				title: 'Create a Message - Members Only',
