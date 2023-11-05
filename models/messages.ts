@@ -1,4 +1,10 @@
-import mongoose, { InferSchemaType, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
+
+export interface IMessage extends Document {
+	user: mongoose.Types.ObjectId;
+	title: string;
+	text: string;
+}
 
 const MessageSchema = new Schema(
 	{
@@ -11,6 +17,6 @@ const MessageSchema = new Schema(
 	}
 );
 
-type MessageType = InferSchemaType<typeof MessageSchema>;
+const Message = mongoose.model<IMessage>('Message', MessageSchema);
 
-const MessageModel = mongoose.model<MessageType>('Message', MessageSchema);
+export default Message;
