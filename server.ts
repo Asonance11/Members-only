@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
@@ -27,6 +28,7 @@ app.use(
 		saveUninitialized: true,
 	})
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
