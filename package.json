@@ -23,7 +23,9 @@
 	},
 	"homepage": "https://github.com/Asonance11/Members-only#readme",
 	"dependencies": {
+		"@types/connect-flash": "^0.0.39",
 		"bcryptjs": "^2.4.3",
+		"connect-flash": "^0.1.1",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"debug": "^4.3.4",
