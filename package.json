@@ -9,7 +9,7 @@
 		"start": "node dist/index.js",
 		"dev": "ts-node-dev server.ts",
 		"build:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css",
-		"watch:css": "pnpm run build:css -- --watch"
+		"watch:css": "pnpm run build:css --watch"
 	},
 	"repository": {
 		"type": "git",
