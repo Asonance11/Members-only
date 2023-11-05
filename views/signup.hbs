@@ -1,34 +1,63 @@
-<h1>{{title}}</h1>
-<form id='signup-form' action='/signup' method='post'>
-	<div>
-		<label for='username'>Username</label>
-		<input type='text' id='username' name='username' required />
-	</div>
-	<div>
-		<label for='password'>Password</label>
-		<input type='password' id='password' name='password' required />
-	</div>
-	<div>
-		<label for='password'>Confirm Password</label>
-		<input
-			type='password'
-			id='confirm_password'
-			name='confirm_password'
-			required
-		/>
-	</div>
-	<div>
-		<button type='submit'>Sign in</button>
-	</div>
-</form>
+<div class='flex flex-col items-center justify-center mt-10'>
+	<h2 class='text-2xl text-wild-sand-500 mb-4'>Sign up</h2>
 
-{{#if errors.length}}
-	<div class='errors'>
-		<p>Error(s) occurred:</p>
-		<ul>
-			{{#each errors}}
-				<li>{{this.msg}}</li>
-			{{/each}}
-		</ul>
-	</div>
-{{/if}}
+	<form
+		id='signup-form'
+		action='/signup'
+		method='post'
+		class='max-w-md mx-auto p-4 border rounded-lg shadow-xl'
+	>
+		<div class='mb-4'>
+			<label for='username' class='text-wild-sand-500'>Username</label>
+			<input
+				type='text'
+				id='username'
+				name='username'
+				required
+				class='w-full px-3 py-2 border border-wild-sand-300 rounded-lg focus:outline-none focus:border-blue-500'
+			/>
+		</div>
+		<div class='mb-4'>
+			<label for='password' class='text-wild-sand-500'>Password</label>
+			<input
+				type='password'
+				id='password'
+				name='password'
+				class='w-full px-3 py-2 border border-wild-sand-300 rounded-lg focus:outline-none focus:border-blue-500'
+				required
+			/>
+		</div>
+		<div class='mb-4'>
+			<label for='password ' class='text-wild-sand-500'>Confirm Password</label>
+			<input
+				type='password'
+				id='confirm_password'
+				name='confirm_password'
+				class='w-full px-3 py-2 border border-wild-sand-300 rounded-lg focus:outline-none focus:border-blue-500'
+				required
+			/>
+		</div>
+		<p class='mb-4 text-wild-sand-500'>already have an account?
+			<a href='/login' class='text-wild-sand-800 hover:underline'>Log in</a></p>
+		<div class='mb-4'>
+			<button
+				type='submit'
+				class='w-full bg-wild-sand-500 text-white p-2 rounded-lg hover:bg-wild-sand-600'
+			>Sign in</button>
+		</div>
+	</form>
+
+	{{#if errors.length}}
+		<div
+			class='errors'
+			class='max-w-md mx-auto mt-4 p-4 border border-red-300 rounded-lg bg-red-100 text-red-700'
+		>
+			<p class='font-semibold text-red-500 mb-2'>Error(s) occurred:</p>
+			<ul class='list-disc ml-6'>
+				{{#each errors}}
+					<li>{{this.msg}}</li>
+				{{/each}}
+			</ul>
+		</div>
+	{{/if}}
+</div>
