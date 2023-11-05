@@ -1,9 +1,41 @@
 <html>
 	<head>
 		<title>{{title}}</title>
-		<link rel='stylesheet' href='/public/stylesheets/style.css' />
+		<link rel='stylesheet' href='/stylesheets/style.css' />
 	</head>
 	<body>
+		<header
+			class='z-10 sticky w-full top-0 px-6 py-4 flex flex-wrap justify-between items-center gap-4 bg-wild-sand-50'
+		>
+			<a href='/'>Members Only</a>
+
+			<nav>
+				<ul class='flex items-center gap-4'>
+					{{#unless user}}
+						<li><a
+								href='/login'
+								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
+							>Login</a></li>
+						<li><a
+								href='/signup'
+								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
+							>Signup</a></li>
+					{{else}}
+						{{#unless user.member}}
+							<li><a
+									href='/become-member'
+									class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
+								>Become a Member</a></li>
+						{{/unless}}
+						<li><a
+								href='/logout'
+								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
+							>Logout</a></li>
+					{{/unless}}
+				</ul>
+			</nav>
+
+		</header>
 		{{{body}}}
 	</body>
 </html>
