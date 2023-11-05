@@ -1,6 +1,13 @@
 {{#if user}}
 	<p>Hi {{user.username}}</p>
-
+	{{#each messages}}
+		<div class='message'>
+			<p>User: {{user.username}}</p>
+			<p>Title: {{title}}</p>
+			<p>Text: {{text}}</p>
+			<p>Created At: {{createdAt}}</p>
+		</div>
+	{{/each}}
 {{else}}
 	<h1>{{title}}</h1>
 	<p>Welcome to {{title}}</p>
