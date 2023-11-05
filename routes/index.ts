@@ -16,11 +16,24 @@ import {
 	member_get,
 	member_post,
 } from '../controllers/userController';
+import Message from '../models/messages';
 
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-	res.render('index', { title: 'Members Only', user: req.user });
+// index
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const allMessages = await Message.find({})
+			.sort({ createdAt: -1 })
+			.populate('user');
+		res.render('index', {
+			title: 'Members Only',
+			user: req.user,
+			messages: allMessages,
+		});
+	} catch (error) {
+		return next(error);
+	}
 });
 
 // signup
