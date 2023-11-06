@@ -1,14 +1,44 @@
 {{#if user}}
-	<p>Hi {{user.username}}</p>
+	<p>Welcome back {{user.username}}</p>
+	<a
+		class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
+		href='/create-message'
+	>Create a message</a>
+
 	{{#each messages}}
 		<div class='message'>
-			<p>User: {{user.username}}</p>
+			<p>User: {{#if user.member}}{{user.username}}{{else}}???{{/if}}</p>
+			<p>Title: {{title}}</p>
+			<p>Text: {{text}}</p>
+			<p>Created At: {{createdAt}}</p>
+			{{#unless user.member}}
+				<p>Become a member to see the author of the message</p>
+			{{/unless}}
+		</div>
+	{{/each}}
+
+	{{!-- {{#if user.member}}
+		{{#each messages}}
+			<div class='message'>
+				<p>User: {{user.username}}</p>
+				<p>Title: {{title}}</p>
+				<p>Text: {{text}}</p>
+				<p>Created At: {{createdAt}}</p>
+			</div>
+		{{/each}}
+	{{/if}} --}}
+
+{{else}}
+	<h1>{{title}}</h1>
+	<p>Welcome to {{title}}</p>
+
+	{{#each messages}}
+		<div class='message'>
+			<p>User: ???</p>
 			<p>Title: {{title}}</p>
 			<p>Text: {{text}}</p>
 			<p>Created At: {{createdAt}}</p>
 		</div>
 	{{/each}}
-{{else}}
-	<h1>{{title}}</h1>
-	<p>Welcome to {{title}}</p>
+
 {{/if}}
