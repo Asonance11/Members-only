@@ -1,4 +1,5 @@
 <html>
+
 	<head>
 		<title>{{title}}</title>
 		<link rel='stylesheet' href='/stylesheets/style.css' />
@@ -9,39 +10,30 @@
 			rel='stylesheet'
 		/>
 	</head>
+
 	<body class='font-sans'>
+
 		<header
-			class='z-10 sticky w-full top-0 px-6 py-4 flex flex-wrap justify-between items-center gap-4 bg-wild-sand-50'
+			class='z-10 sticky top-0 px-6 py-4 flex flex-wrap justify-between items-center gap-4 bg-wild-sand-50'
 		>
 			<a href='/' class='text-2xl text-wild-sand-700 font-bold'>Members Only</a>
 
-			<nav>
-				<ul class='flex items-center gap-4'>
-					{{#unless user}}
-						<li><a
-								href='/login'
-								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
-							>Login</a></li>
-						<li><a
-								href='/signup'
-								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
-							>Signup</a></li>
-					{{else}}
-						{{#unless user.member}}
-							<li><a
-									href='/member'
-									class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
-								>Become a Member</a></li>
-						{{/unless}}
-						<li><a
-								href='/logout'
-								class='py-2 px-4 rounded bg-wild-sand-500 text-wild-sand-50 hover:bg-wild-sand-600'
-							>Logout</a></li>
+			<nav class='md:flex items-center gap-4'>
+				{{#unless user}}
+					<a href='/login' class='btn'>Login</a>
+					<a href='/signup' class='btn'>Signup</a>
+				{{else}}
+					{{#unless user.member}}
+						<a href='/member' class='btn'>Become a Member</a>
 					{{/unless}}
-				</ul>
+					<a href='/logout' class='btn'>Logout</a>
+				{{/unless}}
 			</nav>
 
 		</header>
+
 		{{{body}}}
+
 	</body>
+
 </html>
