@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IMessage extends Document {
@@ -16,6 +17,12 @@ const MessageSchema = new Schema(
 		timestamps: true,
 	}
 );
+
+MessageSchema.virtual('created_date_formatted').get(function () {
+	return DateTime.fromJSDate(this.createdAt).toLocaleString(
+		DateTime.DATETIME_MED
+	);
+});
 
 const Message = mongoose.model<IMessage>('Message', MessageSchema);
 
