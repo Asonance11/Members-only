@@ -12,9 +12,9 @@
 					{{#unless ../user.member}}???{{else}}{{this.user.username}}{{/unless}}</p>
 				<p class='text-wild-sand-600'>Title: {{this.title}}</p>
 				<p class='text-wild-sand-600'>Text: {{this.text}}</p>
-				<p class='text-wild-sand-600'>Created At: {{this.createdAt}}</p>
+				<p class='text-wild-sand-600'>Created At: {{this.created_date_formatted}}</p>
 				{{#unless ../user.member}}
-					<p class='text-wild-sand-600'>Become a member to see the author of the
+					<p class='text-wild-sand-400'>Become a member to see the author of the
 						message</p>
 				{{/unless}}
 			</div>
@@ -31,7 +31,7 @@
 				<p class='text-wild-sand-600'>User: ???</p>
 				<p class='text-wild-sand-600'>Title: {{title}}</p>
 				<p class='text-wild-sand-600'>Text: {{text}}</p>
-				<p class='text-wild-sand-600'>Created At: {{createdAt}}</p>
+				<p class='text-wild-sand-600'>Created At: {{created_date_formatted}}</p>
 			</div>
 		{{/each}}
 	</div>
