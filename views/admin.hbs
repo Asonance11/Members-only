@@ -1,32 +1,45 @@
-{{#if user.admin}}
-
-	<div>
-		<h2>Congrats you are an admin</h2>
-	</div>
-
-{{else}}
-	<h1>Become an Admin</h1>
-	<form action='/admin' method='post'>
+<div class='flex flex-col items-center justify-center mt-10'>
+	{{#if user.admin}}
 		<div>
-			<input
-				type='password'
-				id='password'
-				name='password'
-				placeholder='Enter the admin password'
-				required
-			/>
+			<h2 class='text-xl font-medium text-wild-sand-600'>Congrats you are an
+				admin</h2>
 		</div>
-		<button type='submit'>Submit password</button>
-	</form>
-{{/if}}
+	{{else}}
+		<div class='max-w-md mx-auto p-4 border rounded-lg shadow-xl'>
+			<h1 class='text-2xl text-wild-sand-500 mb-4'>Become an Admin</h1>
+			<form action='/admin' method='post'>
+				<div class='mb-4'>
+					<input
+						type='password'
+						id='password'
+						name='password'
+						placeholder='Enter the admin password'
+						required
+						class='w-full px-3 py-2 border border-wild-sand-300 rounded-lg focus:outline-none focus:border-blue-500'
+					/>
+				</div>
+				<div class='mb-4'>
+					<button
+						type='submit'
+						class='w-full bg-wild-sand-500 text-white p-2 rounded-lg hover:bg-wild-sand-600'
+					>
+						Submit password
+					</button>
+				</div>
+			</form>
+		</div>
+	{{/if}}
 
-{{#if errors.length}}
-	<div class='errors'>
-		<p>Error(s) occurred:</p>
-		<ul>
-			{{#each errors}}
-				<li>{{this.msg}}</li>
-			{{/each}}
-		</ul>
-	</div>
-{{/if}}
+	{{#if errors.length}}
+		<div
+			class='max-w-md mt-4 p-4 border border-red-300 rounded-lg bg-red-100 text-red-700'
+		>
+			<p class='font-semibold text-red-500 mb-2'>Error(s) occurred:</p>
+			<ul class='list-disc ml-6'>
+				{{#each errors}}
+					<li>{{this.msg}}</li>
+				{{/each}}
+			</ul>
+		</div>
+	{{/if}}
+</div>
