@@ -3,6 +3,9 @@ module.exports = {
 	content: ['./views/*.hbs'],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ['Rubik', 'sans-serif'],
+			},
 			colors: {
 				'wild-sand': {
 					50: '#f3f4f6',
